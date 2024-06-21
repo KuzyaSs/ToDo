@@ -1,0 +1,21 @@
+<resources>
+    <string name="to_do_information">To-do Information</string>
+    <string name="my_to_do">My To-do</string>
+    <string name="num_of_done_to_do">Done - %d</string>
+    <string name="add_to_do">Add To-do</string>
+    <string name="new_to_do">New To-do</string>
+    <string name="delete_to_do">Delete To-do</string>
+    <string name="change_done_to_do_visibility">Change done To-do visibility</string>
+    <string name="deadline">Deadline</string>
+    <string name="priority">Priority</string>
+    <string name="low_priority">Low priority</string>
+    <string name="urgent_priority">Urgent priority</string>
+    <string name="low_priority_selection">Low</string>
+    <string name="normal_priority_selection">No</string>
+    <string name="urgent_priority_selection">!! Urgent</string>
+    <string name="done">Done</string>
+    <string name="delete">Delete</string>
+    <string name="save">Save</string>
+    <string name="close">Close</string>
+    <string name="what_need_to_do">What need to do…</string>
+</resources>

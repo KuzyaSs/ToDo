@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ToDoDatePicker" parent="android:Theme.Material.Light.Dialog">
+        <item name="android:datePickerStyle">@style/ToDoDatePickerStyle</item>
+        <item name="android:headerBackground">@color/backSecondary</item>
+        <item name="android:colorBackground">@color/backSecondary</item>
+        <item name="android:colorAccent">@color/blue</item>
+        <item name="android:colorControlActivated">@color/blue</item>
+        <item name="android:textColorPrimary">@color/labelPrimary</item>
+        <item name="android:textColorSecondary">@color/labelTertiary</item>
+    </style>
+
+    <style name="ToDoDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
+        <item name="android:headerBackground">@color/blue</item>
+    </style>
+</resources>

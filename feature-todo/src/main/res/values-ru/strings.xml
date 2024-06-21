@@ -1,0 +1,21 @@
+<resources>
+    <string name="to_do_information">Информация о деле</string>
+    <string name="my_to_do">Мои дела</string>
+    <string name="num_of_done_to_do">Выполнено - %d</string>
+    <string name="add_to_do">Добавить дело</string>
+    <string name="new_to_do">Новое дело</string>
+    <string name="delete_to_do">Удалить дело</string>
+    <string name="change_done_to_do_visibility">Сменить видимость выполненных дел</string>
+    <string name="deadline">Срок</string>
+    <string name="priority">Приоритет</string>
+    <string name="low_priority">Низкий приоритет</string>
+    <string name="urgent_priority">Высокий приоритет</string>
+    <string name="low_priority_selection">Низкий</string>
+    <string name="normal_priority_selection">Нет</string>
+    <string name="urgent_priority_selection">!! Высокий</string>
+    <string name="done">Сделано</string>
+    <string name="delete">Удалить</string>
+    <string name="save">Сохранить</string>
+    <string name="close">Закрыть</string>
+    <string name="what_need_to_do">Что надо сделать…</string>
+</resources>
