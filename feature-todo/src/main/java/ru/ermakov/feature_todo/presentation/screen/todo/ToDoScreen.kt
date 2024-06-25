@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -119,9 +118,8 @@ fun ToDoScreen(
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = ToDoTheme.size.medium)
                     .clickable(enabled = state.toDoId != null) { onEvent(ToDoEvent.OnDeleteClick) }
+                    .padding(vertical = ToDoTheme.size.medium)
             ) {
                 Icon(
                     imageVector = Icons.Default.Delete,
