@@ -1,6 +1,7 @@
 package ru.ermakov.feature_todo.presentation.screen.todo
 
 import android.app.DatePickerDialog
+import android.content.res.Configuration
 import android.widget.DatePicker
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -140,6 +141,7 @@ fun ToDoScreen(
 }
 
 @Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun ToDoScreenPreview() {
     ToDoTheme {

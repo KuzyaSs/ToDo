@@ -1,5 +1,6 @@
 package ru.ermakov.feature_todo.presentation.screen.todos.component
 
+import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -74,7 +75,8 @@ fun ToDoList(
     }
 }
 
-@Preview(showSystemUi = true)
+@Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun ToDoListPreview() {
     ToDoTheme {

@@ -72,24 +72,16 @@ class ToDoViewModel @Inject constructor(private val toDoRepository: ToDoReposito
     private fun saveToDo() {
         viewModelScope.launch {
             _state.value.apply {
+                val toDoRequest = ToDoRequest(
+                    id = toDoId,
+                    content = content,
+                    priority = priority,
+                    deadline = deadline
+                )
                 if (toDoId != null) {
-                    toDoRepository.updateTodo(
-                        toDoRequest = ToDoRequest(
-                            id = toDoId,
-                            content = content,
-                            priority = priority,
-                            deadline = deadline
-                        )
-                    )
+                    toDoRepository.updateTodo(toDoRequest = toDoRequest)
                 } else {
-                    toDoRepository.insertTodo(
-                        toDoRequest = ToDoRequest(
-                            id = null,
-                            content = content,
-                            priority = priority,
-                            deadline = deadline
-                        )
-                    )
+                    toDoRepository.insertTodo(toDoRequest = toDoRequest)
                 }
             }
             _effect.send(ToDoEffect.OnNavigateBack)
@@ -135,10 +127,10 @@ class ToDoViewModel @Inject constructor(private val toDoRepository: ToDoReposito
 
     private fun deleteToDo() {
         viewModelScope.launch {
-            _effect.send(ToDoEffect.OnNavigateBack)
             _state.value.toDoId?.let { toDoId ->
                 toDoRepository.deleteToDoById(toDoId = toDoId)
             }
+            _effect.send(ToDoEffect.OnNavigateBack)
         }
     }
 }

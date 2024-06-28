@@ -1,5 +1,6 @@
 package ru.ermakov.feature_todo.presentation.screen.todos.component
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Surface
@@ -32,6 +33,7 @@ fun PriorityImage(priority: Priority, modifier: Modifier = Modifier) {
 }
 
 @Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun PriorityImagePreview() {
     ToDoTheme {

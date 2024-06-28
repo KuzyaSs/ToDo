@@ -12,6 +12,7 @@ object ToDosDestination
 
 fun NavGraphBuilder.toDosDestination(onNavigateToToDoDestination: (toDoId: String?) -> Unit) {
     composable<ToDosDestination> {
+        // Задание по лекциям Многопоточность и Корутины (для отображения в pull request).
         val toDosViewModel = hiltViewModel<ToDosViewModel>()
         val state by toDosViewModel.state.collectAsStateWithLifecycle()
         val effect by toDosViewModel.effect.collectAsStateWithLifecycle(null)

@@ -15,6 +15,7 @@ data class ToDoDestination(
 
 fun NavGraphBuilder.toDoDestination(onNavigateBack: () -> Unit) {
     composable<ToDoDestination> { navBackStackEntry ->
+        // Задание по лекциям Многопоточность и Корутины (для отображения в pull request).
         val toDoViewModel = hiltViewModel<ToDoViewModel>()
         val state by toDoViewModel.state.collectAsStateWithLifecycle()
         val effect by toDoViewModel.effect.collectAsStateWithLifecycle(null)
