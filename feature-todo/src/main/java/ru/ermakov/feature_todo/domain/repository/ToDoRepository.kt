@@ -6,6 +6,7 @@ import ru.ermakov.core.domain.model.RootError
 import ru.ermakov.feature_todo.domain.model.ToDo
 import ru.ermakov.feature_todo.domain.model.ToDoRequest
 
+// Задание по лекциям Многопоточность и Корутины (для отображения в pull request).
 interface ToDoRepository {
     fun getToDos(): Flow<Result<List<ToDo>, RootError>>
     suspend fun getToDoById(toDoId: String): Result<ToDo, RootError>

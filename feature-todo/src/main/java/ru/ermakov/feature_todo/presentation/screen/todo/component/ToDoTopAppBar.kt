@@ -1,5 +1,6 @@
 package ru.ermakov.feature_todo.presentation.screen.todo.component
 
+import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -58,13 +59,14 @@ fun ToDoTopAppBar(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun ToDoTopAppBarPreview() {
     ToDoTheme {
         Surface(color = ToDoTheme.colors.backPrimary) {
             ToDoTopAppBar(
                 topAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
-                isSaveAvailable = false,
+                isSaveAvailable = true,
                 onCloseClick = {},
                 onSaveClick = {},
             )

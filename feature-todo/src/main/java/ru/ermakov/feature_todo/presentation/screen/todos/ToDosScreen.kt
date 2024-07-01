@@ -1,5 +1,6 @@
 package ru.ermakov.feature_todo.presentation.screen.todos
 
+import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,6 +23,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.datetime.Clock
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.Month
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import ru.ermakov.core.presentation.theme.ToDoTheme
@@ -109,6 +112,7 @@ fun ToDosScreen(
 }
 
 @Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun ToDosScreenPreview() {
     ToDoTheme {
@@ -138,7 +142,7 @@ fun ToDosScreenPreview() {
                                     Clock.System.now()
                                         .toLocalDateTime(TimeZone.currentSystemDefault()),
                                     null,
-                                    null
+                                    LocalDate(year = 2024, month = Month(1), dayOfMonth = 1)
                                 )
                             )
                             add(

@@ -23,6 +23,7 @@ import javax.inject.Inject
 соответствующими темами реализация всех методов будет изменена. На данный момент разработаны
 методы-заглушки, так что можно сюда не смотреть)
  */
+// Задание по лекциям Многопоточность и Корутины (для отображения в pull request).
 class ToDoRepositoryImpl @Inject constructor() : ToDoRepository {
     private val toDoS = MutableStateFlow(buildList {
         add(

@@ -16,8 +16,9 @@ import ru.ermakov.feature_todo.domain.repository.ToDoRepository
 import javax.inject.Inject
 
 @HiltViewModel
-class ToDosViewModel @Inject constructor(private val toDoRepository: ToDoRepository) :
-    ViewModel() {
+class ToDosViewModel @Inject constructor(
+    private val toDoRepository: ToDoRepository
+) : ViewModel() {
     private val _state = MutableStateFlow(ToDosState())
     val state: StateFlow<ToDosState> = _state.asStateFlow()
 
@@ -38,9 +39,7 @@ class ToDosViewModel @Inject constructor(private val toDoRepository: ToDoReposit
                     }
 
                     is Result.Error -> {
-                        _state.update { state ->
-                            state.copy(error = toDosResult.error)
-                        }
+                        _state.update { state -> state.copy(error = toDosResult.error) }
                     }
                 }
             }
@@ -61,7 +60,6 @@ class ToDosViewModel @Inject constructor(private val toDoRepository: ToDoReposit
                 toDoId = event.toDoId,
                 isDone = event.isDone
             )
-
         }
     }
 

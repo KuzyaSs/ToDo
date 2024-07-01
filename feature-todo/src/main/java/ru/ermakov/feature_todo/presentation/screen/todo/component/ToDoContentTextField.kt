@@ -1,5 +1,6 @@
 package ru.ermakov.feature_todo.presentation.screen.todo.component
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -52,6 +53,7 @@ fun ToDoContentTextField(
 }
 
 @Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun ToDoContentTextFieldPreview() {
     ToDoTheme {
