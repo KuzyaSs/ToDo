@@ -22,4 +22,6 @@ dependencyResolutionManagement {
 rootProject.name = "ToDo"
 include(":app")
 include(":core")
-include(":feature-todo")
+include(":feature-todo-impl")
+include(":feature-todo-api")
+include(":database")

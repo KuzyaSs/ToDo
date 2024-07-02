@@ -12,10 +12,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.ermakov.core.presentation.theme.ToDoTheme
-import ru.ermakov.feature_todo.presentation.screen.todo.ToDoDestination
-import ru.ermakov.feature_todo.presentation.screen.todo.toDoDestination
-import ru.ermakov.feature_todo.presentation.screen.todos.ToDosDestination
-import ru.ermakov.feature_todo.presentation.screen.todos.toDosDestination
+import ru.ermakov.feature_todo_impl.presentation.screen.todo.ToDoDestination
+import ru.ermakov.feature_todo_impl.presentation.screen.todo.toDoDestination
+import ru.ermakov.feature_todo_impl.presentation.screen.todos.ToDosDestination
+import ru.ermakov.feature_todo_impl.presentation.screen.todos.toDosDestination
 
 @AndroidEntryPoint
 class ToDoActivity : ComponentActivity() {

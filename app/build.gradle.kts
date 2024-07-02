@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    id("kotlin-kapt")
     alias(libs.plugins.daggerHiltAndroid)
+    id("kotlin-kapt")
 }
 
 android {
@@ -72,9 +72,10 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
-
     implementation(project(":core"))
-    implementation(project(":feature-todo"))
+    implementation(project(":database"))
+    implementation(project(":feature-todo-api"))
+    implementation(project(":feature-todo-impl"))
 }
 
 kapt {
