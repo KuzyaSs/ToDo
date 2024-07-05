@@ -1,13 +1,14 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.jetbrainsKotlinSerialization)
     alias(libs.plugins.daggerHiltAndroid)
     id("kotlin-kapt")
 }
 
 android {
-    namespace = "ru.ermakov.feature_todo_impl"
+    namespace = "ru.ermakov.network"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
@@ -15,6 +16,10 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        val properties = Properties()
+        properties.load(project.rootProject.file("local.properties").inputStream())
+        buildConfigField("String", "TOKEN", properties.getProperty("TOKEN"))
     }
 
     buildTypes {
@@ -34,44 +39,25 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures {
-        compose = true
+        buildConfig = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
     }
 }
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.material.icons.extended)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
-    implementation(libs.kotlinx.datetime)
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.kotlinx.serialization.json)
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
-    implementation(libs.androidx.hilt.navigation.compose)
-    implementation(libs.androidx.room.runtime)
-    kapt(libs.androidx.room.compiler)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(project(":core"))
-    implementation(project(":database"))
-    implementation(project(":network"))
-    implementation(project(":feature-todo-api"))
 }
 
 kapt {

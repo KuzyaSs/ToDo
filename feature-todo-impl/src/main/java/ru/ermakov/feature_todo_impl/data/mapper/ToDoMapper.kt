@@ -9,6 +9,9 @@ import kotlinx.datetime.toLocalDateTime
 import ru.ermakov.feature_todo_api.data.local.model.LocalToDo
 import ru.ermakov.feature_todo_api.domain.model.ToDo
 import ru.ermakov.feature_todo_api.domain.model.ToDoRequest
+import ru.ermakov.feature_todo_impl.data.remote.model.RemoteToDo
+import ru.ermakov.feature_todo_impl.data.remote.utils.toPriority
+import ru.ermakov.feature_todo_impl.data.remote.utils.toStringPriority
 import java.util.UUID
 
 fun ToDo.toLocalToDo(): LocalToDo {
@@ -21,6 +24,21 @@ fun ToDo.toLocalToDo(): LocalToDo {
             creationDate = creationDate.toInstant(TimeZone.currentSystemDefault()).epochSeconds,
             modificationDate = modificationDate?.toInstant(TimeZone.currentSystemDefault())?.epochSeconds,
             deadline = deadline?.atStartOfDayIn(TimeZone.currentSystemDefault())?.epochSeconds
+        )
+    }
+}
+
+fun ToDo.toRemoteToDo(deviceId: String): RemoteToDo {
+    this.apply {
+        return RemoteToDo(
+            id = id,
+            content = content,
+            priority = priority.toStringPriority(),
+            isDone = isDone,
+            creationDate = creationDate.toInstant(TimeZone.currentSystemDefault()).epochSeconds,
+            modificationDate = modificationDate?.toInstant(TimeZone.currentSystemDefault())?.epochSeconds,
+            deadline = deadline?.atStartOfDayIn(TimeZone.currentSystemDefault())?.epochSeconds,
+            deviceId = deviceId
         )
     }
 }
@@ -45,6 +63,25 @@ fun LocalToDo.toToDo(): ToDo {
             id = id,
             content = content,
             priority = priority,
+            isDone = isDone,
+            creationDate = Instant.fromEpochSeconds(creationDate)
+                .toLocalDateTime(TimeZone.currentSystemDefault()),
+            modificationDate = modificationDate?.let {
+                Instant.fromEpochSeconds(it).toLocalDateTime(TimeZone.currentSystemDefault())
+            },
+            deadline = deadline?.let {
+                Instant.fromEpochSeconds(it).toLocalDateTime(TimeZone.currentSystemDefault()).date
+            }
+        )
+    }
+}
+
+fun RemoteToDo.toToDo(): ToDo {
+    this.apply {
+        return ToDo(
+            id = id,
+            content = content,
+            priority = priority.toPriority(),
             isDone = isDone,
             creationDate = Instant.fromEpochSeconds(creationDate)
                 .toLocalDateTime(TimeZone.currentSystemDefault()),

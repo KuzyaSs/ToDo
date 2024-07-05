@@ -74,6 +74,7 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(project(":core"))
     implementation(project(":database"))
+    implementation(project(":network"))
     implementation(project(":feature-todo-api"))
     implementation(project(":feature-todo-impl"))
 }
