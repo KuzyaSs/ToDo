@@ -13,7 +13,9 @@ import ru.ermakov.feature_todo_impl.data.remote.model.RemoteToDo
 import ru.ermakov.feature_todo_impl.data.remote.model.RemoteToDoResponse
 import ru.ermakov.feature_todo_impl.data.remote.model.RemoteToDos
 import ru.ermakov.feature_todo_impl.data.remote.model.RemoteToDosResponse
-
+/**
+ * Contacts a remote server for to-dos.
+ */
 private const val REVISION_HEADER = "X-Last-Known-Revision"
 
 interface ToDoApi {

@@ -23,7 +23,7 @@ fun NavGraphBuilder.toDoDestination(onNavigateBack: () -> Unit) {
         val toDoDestination: ToDoDestination = navBackStackEntry.toRoute()
         var isFirstEnterScreen by rememberSaveable { mutableStateOf(true) }
         LaunchedEffect(isFirstEnterScreen) {
-            if (isFirstEnterScreen) {
+            if (isFirstEnterScreen && toDoDestination.toDoId != null) {
                 toDoViewModel.obtainEvent(ToDoEvent.OnEnterScreen(toDoId = toDoDestination.toDoId))
                 isFirstEnterScreen = false
             }

@@ -18,4 +18,7 @@
     <string name="save">Save</string>
     <string name="close">Close</string>
     <string name="what_need_to_do">What need to do…</string>
+    <string name="to_do_not_found">To-do not found</string>
+    <string name="overdue_deadline">Overdue deadline</string>
+    <string name="retry">Retry</string>
 </resources>

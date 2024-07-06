@@ -8,10 +8,7 @@ import ru.ermakov.feature_todo_api.domain.use_case.GetToDoByIdUseCase
 import ru.ermakov.feature_todo_impl.domain.repository.ToDoRepository
 
 class GetToDoByIdUseCaseImpl(private val toDoRepository: ToDoRepository) : GetToDoByIdUseCase {
-    override suspend fun invoke(toDoId: String?): Result<ToDo, RootError> {
-        if (toDoId == null) {
-            return Result.Error(error = ToDoError.TO_DO_NOT_FOUND)
-        }
+    override suspend fun invoke(toDoId: String): Result<ToDo, RootError> {
         return toDoRepository.getToDoById(toDoId = toDoId)
     }
 }

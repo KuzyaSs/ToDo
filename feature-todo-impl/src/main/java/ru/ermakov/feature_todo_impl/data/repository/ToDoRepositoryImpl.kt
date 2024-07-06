@@ -106,7 +106,7 @@ class ToDoRepositoryImpl @Inject constructor(
         }
     }
 
-    private suspend fun syncToDos(): Result<Revision, RootError> {
+    override suspend fun syncToDos(): Result<Revision, RootError> {
         return when (val remoteToDosResult = toDoRemoteDataSource.getToDos()) {
             is Result.Success -> {
                 val syncedToDos = mutableListOf<ToDo>()

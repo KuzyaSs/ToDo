@@ -9,7 +9,11 @@ import ru.ermakov.core.error.RootError
 import ru.ermakov.feature_todo_api.domain.model.Priority
 import ru.ermakov.feature_todo_api.domain.model.ToDo
 
+/**
+ * UI state of ToDoScreen.
+ */
 data class ToDoState(
+    val toDoId: String = "",
     val toDo: ToDo? = null,
     val content: String = "",
     val priority: Priority = Priority.NORMAL,
@@ -19,5 +23,6 @@ data class ToDoState(
     val deadline: LocalDate? = null,
     val isDeadlineSwitchChecked: Boolean = false,
     val isDatePickerVisible: Boolean = false,
+    val isLoading: Boolean = false,
     val error: RootError? = null
 )

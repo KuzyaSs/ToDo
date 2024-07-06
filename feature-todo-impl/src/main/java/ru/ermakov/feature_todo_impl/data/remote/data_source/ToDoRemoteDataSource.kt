@@ -5,6 +5,9 @@ import ru.ermakov.core.result.Result
 import ru.ermakov.feature_todo_api.domain.model.ToDo
 import ru.ermakov.feature_todo_impl.data.remote.model.RemoteToDo
 
+/**
+ * Manages to-dos remotely.
+ */
 interface ToDoRemoteDataSource {
     suspend fun getToDos(): Result<Pair<List<ToDo>, Revision>, RootError>
     suspend fun getToDoById(toDoId: String): Result<ToDo, RootError>
