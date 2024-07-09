@@ -9,5 +9,6 @@ data class ToDosState(
     val toDos: List<ToDo> = emptyList(),
     val numOfDoneToDos: Int = 0,
     val isDoneToDoVisible: Boolean = true,
+    val isOfflineMode: Boolean = false,
     val isLoading: Boolean = true,
 )

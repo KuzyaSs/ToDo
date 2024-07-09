@@ -24,7 +24,7 @@ import ru.ermakov.feature_todo_api.domain.model.ToDoRequest
 import ru.ermakov.feature_todo_api.domain.use_case.DeleteToDoByIdUseCase
 import ru.ermakov.feature_todo_api.domain.use_case.GetToDoByIdUseCase
 import ru.ermakov.feature_todo_api.domain.use_case.SaveToDoUseCase
-import ru.ermakov.feature_todo_impl.presentation.screen.todos.SNACKBAR_DELAY
+import ru.ermakov.feature_todo_impl.presentation.utils.Constants
 import javax.inject.Inject
 
 /**
@@ -109,6 +109,7 @@ class ToDoViewModel @Inject constructor(
     }
 
     private fun saveToDo() {
+        _state.update { state -> state.copy(isSaving = true) }
         viewModelScope.launch {
             _state.value.apply {
                 val toDoRequest = ToDoRequest(
@@ -140,7 +141,7 @@ class ToDoViewModel @Inject constructor(
 
     private fun changeDeadline(deadline: LocalDate) {
         val currentDate = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
-        if (currentDate.compareTo(deadline) > 0) {
+        if (currentDate > deadline) {
             showSnackBarMessage(error = ToDoError.OVERDUE_DEADLINE)
         } else {
             _state.update { state -> state.copy(deadline = deadline) }
@@ -181,7 +182,7 @@ class ToDoViewModel @Inject constructor(
     private fun showSnackBarMessage(error: RootError) {
         viewModelScope.launch {
             _effect.send(ToDoEffect.ShowSnackBarErrorMessage(error = error))
-            delay(SNACKBAR_DELAY)
+            delay(Constants.SNACKBAR_TIMEOUT)
             _effect.send(null)
         }
     }

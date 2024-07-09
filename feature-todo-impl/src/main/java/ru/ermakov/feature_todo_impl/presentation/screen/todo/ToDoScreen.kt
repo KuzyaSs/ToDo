@@ -16,7 +16,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -72,7 +71,6 @@ fun ToDoScreen(
                     hostState.showSnackbar(message = effect.error.toStringToDoError(context = context))
                 }
             }
-
             null -> Unit
         }
     }
@@ -82,7 +80,7 @@ fun ToDoScreen(
         topBar = {
             ToDoTopAppBar(
                 topAppBarScrollBehavior = topAppBarScrollBehavior,
-                isSaveAvailable = state.content.isNotBlank(),
+                isSaveAvailable = state.content.isNotBlank() && !state.isSaving,
                 onCloseClick = { onEvent(ToDoEvent.OnCloseClick) },
                 onSaveClick = { onEvent(ToDoEvent.OnSaveClick) }
             )
@@ -128,7 +126,7 @@ fun ToDoScreen(
                     Text(
                         text = stringResource(id = R.string.retry),
                         style = ToDoTheme.typography.button,
-                        color = ToDoTheme.colors.backPrimary
+                        color = ToDoTheme.colors.white
                     )
                 }
             }

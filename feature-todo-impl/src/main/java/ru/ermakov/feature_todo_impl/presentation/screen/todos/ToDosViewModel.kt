@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,14 +11,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import ru.ermakov.core.error.RootError
+import ru.ermakov.core.error.CoreError
 import ru.ermakov.core.result.Result
 import ru.ermakov.feature_todo_api.domain.model.ToDo
 import ru.ermakov.feature_todo_api.domain.use_case.ChangeDoneByToDoIdUseCase
 import ru.ermakov.feature_todo_api.domain.use_case.GetToDosUseCase
 import javax.inject.Inject
-
-internal const val SNACKBAR_DELAY = 1000L
 
 /**
  * Controls UI state of ToDosScreen
@@ -66,7 +63,8 @@ class ToDosViewModel @Inject constructor(
                             state.copy(
                                 toDos = toDosResult.data,
                                 numOfDoneToDos = toDosResult.data.count { toDo -> toDo.isDone },
-                                isLoading = false
+                                isOfflineMode = false,
+                                isLoading = false,
                             )
                         }
                     }
@@ -77,10 +75,10 @@ class ToDosViewModel @Inject constructor(
                             state.copy(
                                 toDos = toDos,
                                 numOfDoneToDos = toDos.count { toDo -> toDo.isDone },
-                                isLoading = false
+                                isOfflineMode = toDosResult.error == CoreError.OFFLINE_MODE,
+                                isLoading = false,
                             )
                         }
-                        showSnackBarMessage(error = toDosResult.error)
                     }
                 }
             }
@@ -100,14 +98,6 @@ class ToDosViewModel @Inject constructor(
     private fun navigateToToDoDestination(toDoId: String?) {
         viewModelScope.launch {
             _effect.send(ToDosEffect.OnNavigateToToDoDestination(toDoId = toDoId))
-        }
-    }
-
-    private fun showSnackBarMessage(error: RootError) {
-        viewModelScope.launch {
-            _effect.send(ToDosEffect.ShowSnackBarErrorMessage(error = error))
-            delay(SNACKBAR_DELAY)
-            _effect.send(null)
         }
     }
 }

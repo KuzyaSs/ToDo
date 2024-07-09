@@ -14,6 +14,7 @@
     <string name="normal_priority_selection">Нет</string>
     <string name="urgent_priority_selection">!! Высокий</string>
     <string name="done">Сделано</string>
+    <string name="undone">Не сделано</string>
     <string name="delete">Удалить</string>
     <string name="save">Сохранить</string>
     <string name="close">Закрыть</string>

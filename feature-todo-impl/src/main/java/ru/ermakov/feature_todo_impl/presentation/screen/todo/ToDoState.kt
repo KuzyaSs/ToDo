@@ -24,5 +24,6 @@ data class ToDoState(
     val isDeadlineSwitchChecked: Boolean = false,
     val isDatePickerVisible: Boolean = false,
     val isLoading: Boolean = false,
+    val isSaving: Boolean = false,
     val error: RootError? = null
 )
