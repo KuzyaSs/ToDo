@@ -94,7 +94,7 @@ class ToDoRepositoryImpl @Inject constructor(
 
     override suspend fun deleteToDoById(toDoId: String): Result<Unit, RootError> {
         toDoLocalDataSource.deleteToDoById(toDoId = toDoId)
-        val syncToDosResult = syncToDos()
+        val syncToDosResult = syncToDos(deletedToDoId = toDoId)
         val deleteToDosResult = toDoRemoteDataSource.deleteToDoById(
             toDoId = toDoId,
             revision = if (syncToDosResult is Result.Success) syncToDosResult.data else 0
@@ -106,16 +106,16 @@ class ToDoRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun syncToDos(): Result<Revision, RootError> {
+    override suspend fun syncToDos(deletedToDoId: String): Result<Revision, RootError> {
         return when (val remoteToDosResult = toDoRemoteDataSource.getToDos()) {
             is Result.Success -> {
                 val syncedToDos = mutableListOf<ToDo>()
                 val revision = remoteToDosResult.data.second
                 val lastSyncDate = toDoSyncDateLocalDataSource.getToDoSyncDate()
                 val cachedToDos = toDoLocalDataSource.getCurrentToDos().data
-                val cachedToDoIds = cachedToDos.map { cacheToDo -> cacheToDo.id }
+                val cachedToDoIds = cachedToDos.map { cacheToDo -> cacheToDo.id } - deletedToDoId
                 val remoteToDos = remoteToDosResult.data.first
-                val remoteToDoIds = remoteToDos.map { remoteToDo -> remoteToDo.id }
+                val remoteToDoIds = remoteToDos.map { remoteToDo -> remoteToDo.id } - deletedToDoId
                 syncedToDos.addAll(
                     getSyncedOnlyCachedToDos(
                         cachedToDos = cachedToDos,

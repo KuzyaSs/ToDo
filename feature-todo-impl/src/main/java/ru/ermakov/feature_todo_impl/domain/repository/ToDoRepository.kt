@@ -15,5 +15,5 @@ interface ToDoRepository {
     suspend fun insertToDo(toDoRequest: ToDoRequest): Result<Unit, RootError>
     suspend fun updateToDo(toDo: ToDo): Result<Unit, RootError>
     suspend fun deleteToDoById(toDoId: String): Result<Unit, RootError>
-    suspend fun syncToDos(): Result<Long, RootError>
+    suspend fun syncToDos(deletedToDoId: String = ""): Result<Long, RootError>
 }

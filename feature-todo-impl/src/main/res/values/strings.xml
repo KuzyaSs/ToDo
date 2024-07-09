@@ -14,6 +14,7 @@
     <string name="normal_priority_selection">No</string>
     <string name="urgent_priority_selection">!! Urgent</string>
     <string name="done">Done</string>
+    <string name="undone">Undone</string>
     <string name="delete">Delete</string>
     <string name="save">Save</string>
     <string name="close">Close</string>
