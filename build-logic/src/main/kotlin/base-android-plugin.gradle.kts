@@ -1,39 +1,18 @@
+import com.android.build.gradle.LibraryExtension
+
 plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.daggerHiltAndroid)
-    id("kotlin-kapt")
-    id("my-plugin")
-    id("telegram-reporter")
+    id("com.android.library")
+    id("org.jetbrains.kotlin.android")
 }
 
-myPlugin {
-    deps {
-        enable.set(true)
-        prefix.set("prefix")
-    }
-}
-telegramReporter {
-    token.set(providers.environmentVariable("TG_TOKEN"))
-    chatId.set(providers.environmentVariable("TG_CHAT"))
-}
-
-
-android {
-    namespace = "ru.ermakov.todo"
+configure<LibraryExtension> {
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "ru.ermakov.todo"
         minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = libs.versions.versionCode.get().toInt()
-        versionName = libs.versions.versionName.get()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -58,17 +37,13 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.material.icons.extended)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
@@ -81,20 +56,4 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.hilt.android)
-    implementation(libs.androidx.hilt.work)
-    implementation(libs.androidx.work.runtime)
-    kapt(libs.hilt.android.compiler)
-    implementation(libs.androidx.hilt.navigation.compose)
-    implementation(projects.core)
-    implementation(projects.database)
-    implementation(projects.network)
-    implementation(projects.featureTodoApi)
-    implementation(projects.featureTodoImpl)
-}
-
-kapt {
-    correctErrorTypes = true
 }
