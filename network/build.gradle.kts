@@ -8,7 +8,7 @@ android {
     namespace = "ru.ermakov.network"
 
     defaultConfig {
-        buildConfigField("String", "TOKEN", providers.environmentVariable("TOKEN"))
+        buildConfigField("String", "TOKEN", providers.environmentVariable("TOKEN").get())
     }
 
     buildFeatures {
