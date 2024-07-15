@@ -1,5 +1,5 @@
 plugins {
-    id("base-android-plugin")
+    id("module-convention")
     alias(libs.plugins.daggerHiltAndroid)
     id("kotlin-kapt")
 }

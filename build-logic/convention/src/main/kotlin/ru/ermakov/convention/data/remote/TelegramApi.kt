@@ -1,4 +1,4 @@
-package ru.ermakov.todo.telegram
+package ru.ermakov.convention.data.remote
 
 import io.ktor.client.HttpClient
 import io.ktor.client.request.forms.MultiPartFormDataContent

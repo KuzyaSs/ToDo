@@ -1,4 +1,4 @@
-package ru.ermakov.todo.telegram
+package ru.ermakov.convention.task
 
 import io.ktor.client.statement.bodyAsText
 import kotlinx.coroutines.runBlocking
@@ -8,6 +8,7 @@ import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.TaskAction
+import ru.ermakov.convention.data.remote.TelegramApi
 import javax.inject.Inject
 
 abstract class TelegramReporterTask @Inject constructor(
