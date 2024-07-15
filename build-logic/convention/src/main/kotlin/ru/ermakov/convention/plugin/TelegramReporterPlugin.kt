@@ -1,4 +1,4 @@
-package ru.ermakov.todo.telegram
+package ru.ermakov.convention.plugin
 
 import com.android.build.api.artifact.SingleArtifact
 import com.android.build.api.variant.AndroidComponentsExtension
@@ -10,6 +10,8 @@ import org.gradle.api.Project
 import org.gradle.api.provider.Property
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.support.uppercaseFirstChar
+import ru.ermakov.convention.data.remote.TelegramApiImpl
+import ru.ermakov.convention.task.TelegramReporterTask
 
 class TelegramReporterPlugin : Plugin<Project> {
     override fun apply(project: Project) {

@@ -3,13 +3,9 @@ plugins {
 }
 
 gradlePlugin {
-    plugins.register("my-plugin") {
-        id = "my-plugin"
-        implementationClass = "ru.ermakov.todo.plugin.MyPlugin"
-    }
-    plugins.register("telegram-reporter") {
-        id = "telegram-reporter"
-        implementationClass = "ru.ermakov.todo.telegram.TelegramReporterPlugin"
+    plugins.register("telegram-reporter-plugin") {
+        id = "telegram-reporter-plugin"
+        implementationClass = "ru.ermakov.convention.plugin.TelegramReporterPlugin"
     }
 }
 
