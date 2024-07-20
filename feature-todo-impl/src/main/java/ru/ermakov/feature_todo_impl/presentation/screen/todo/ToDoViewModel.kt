@@ -50,7 +50,7 @@ class ToDoViewModel @Inject constructor(
             is ToDoEvent.OnSaveClick -> saveToDo()
             is ToDoEvent.OnContentChange -> changeContent(content = event.content)
             is ToDoEvent.OnPriorityChange -> changePriority(priority = event.priority)
-            is ToDoEvent.OnPriorityMenuClick -> showPriorityMenu()
+            is ToDoEvent.OnPriorityMenuOpen -> showPriorityMenu()
             is ToDoEvent.OnPriorityMenuDismiss -> hidePriorityMenu()
             is ToDoEvent.OnDeadlineChange -> changeDeadline(deadline = event.deadline)
             is ToDoEvent.OnDeadlineSwitchChange -> changeDeadlineSwitch(isChecked = event.isChecked)

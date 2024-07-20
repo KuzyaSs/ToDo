@@ -10,6 +10,12 @@ telegramReporter {
     chatId.set(providers.environmentVariable("TG_CHAT"))
 }
 
+android {
+    buildFeatures {
+        viewBinding = true
+    }
+}
+
 dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
@@ -21,8 +27,14 @@ dependencies {
     implementation(projects.core)
     implementation(projects.database)
     implementation(projects.network)
+    implementation(projects.featureSettingsApi)
+    implementation(projects.featureSettingsImpl)
     implementation(projects.featureTodoApi)
     implementation(projects.featureTodoImpl)
+    implementation(libs.div)
+    implementation(libs.div.core)
+    implementation(libs.div.json)
+    implementation(libs.glide)
 }
 
 kapt {

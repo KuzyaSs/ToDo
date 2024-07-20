@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Icon
@@ -27,6 +28,7 @@ fun ToDosTopAppBar(
     isOfflineMode: Boolean,
     isDoneToDoVisible: Boolean,
     onDoneToDoVisibilityClick: () -> Unit,
+    onSettingsClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
@@ -42,7 +44,10 @@ fun ToDosTopAppBar(
                 Text(
                     text = stringResource(id = ru.ermakov.core.R.string.offline_mode),
                     style = ToDoTheme.typography.body.copy(color = ToDoTheme.colors.labelTertiary),
-                    modifier = Modifier.padding(start = ToDoTheme.size.medium, top = ToDoTheme.size.extraSmall)
+                    modifier = Modifier.padding(
+                        start = ToDoTheme.size.medium,
+                        top = ToDoTheme.size.extraSmall
+                    )
                 )
             }
         }
@@ -55,6 +60,14 @@ fun ToDosTopAppBar(
                 text = stringResource(id = R.string.num_of_done_to_do, numOfDoneToDos),
                 style = ToDoTheme.typography.body.copy(color = ToDoTheme.colors.labelTertiary),
                 modifier = Modifier.weight(1f)
+            )
+            Icon(
+                imageVector = Icons.Default.Settings,
+                contentDescription = stringResource(id = R.string.navigate_to_settings),
+                tint = ToDoTheme.colors.blue,
+                modifier = Modifier
+                    .padding(end = ToDoTheme.size.medium)
+                    .clickable { onSettingsClick() },
             )
             Icon(
                 imageVector = if (isDoneToDoVisible) Icons.Default.Visibility
@@ -77,11 +90,12 @@ fun ToDosTopAppBarPreview() {
                 isOfflineMode = true,
                 isDoneToDoVisible = true,
                 onDoneToDoVisibilityClick = { },
+                onSettingsClick = { },
                 modifier = Modifier.padding(
                     start = ToDoTheme.size.large,
                     end = ToDoTheme.size.large,
                     bottom = ToDoTheme.size.medium
-                )
+                ),
             )
         }
     }

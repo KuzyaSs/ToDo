@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.res.Configuration
 import android.widget.DatePicker
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,6 +16,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -97,7 +99,7 @@ fun ToDoScreen(
                 }
             )
         },
-        containerColor = ToDoTheme.colors.backPrimary
+        containerColor = ToDoTheme.colors.backPrimary,
     ) { padding ->
         if (state.isLoading) {
             Column(
@@ -150,7 +152,7 @@ fun ToDoScreen(
                 PrioritySelector(
                     priority = state.priority,
                     isMenuVisible = state.isPriorityMenuVisible,
-                    onMenuClick = { onEvent(ToDoEvent.OnPriorityMenuClick) },
+                    onMenuClick = { onEvent(ToDoEvent.OnPriorityMenuOpen) },
                     onDismissRequest = { onEvent(ToDoEvent.OnPriorityMenuDismiss) },
                     onItemClick = { priority -> onEvent(ToDoEvent.OnPriorityChange(priority = priority)) }
                 )
@@ -171,7 +173,11 @@ fun ToDoScreen(
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
-                        .clickable(enabled = state.toDo != null) { onEvent(ToDoEvent.OnDeleteClick) }
+                        .clickable(
+                            enabled = state.toDo != null,
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = rememberRipple(),
+                        ) { onEvent(ToDoEvent.OnDeleteClick) }
                         .padding(vertical = ToDoTheme.size.medium)
                 ) {
                     Icon(

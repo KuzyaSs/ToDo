@@ -40,13 +40,10 @@ class ToDosViewModel @Inject constructor(
     fun obtainEvent(event: ToDosEvent) {
         when (event) {
             is ToDosEvent.OnToDoItemClick -> navigateToToDoDestination(toDoId = event.toDoId)
-
             is ToDosEvent.OnDoneToDoVisibilityClick -> changeDoneToDoVisibility()
-
+            is ToDosEvent.OnSettingsClick -> navigateToSettingsDestination()
             is ToDosEvent.OnAddClick -> navigateToToDoDestination(toDoId = null)
-
             is ToDosEvent.OnNewClick -> navigateToToDoDestination(toDoId = null)
-
             is ToDosEvent.OnDoneChange -> changeDoneByToDoId(
                 toDo = event.toDo,
                 isDone = event.isDone
@@ -98,6 +95,12 @@ class ToDosViewModel @Inject constructor(
     private fun navigateToToDoDestination(toDoId: String?) {
         viewModelScope.launch {
             _effect.send(ToDosEffect.OnNavigateToToDoDestination(toDoId = toDoId))
+        }
+    }
+
+    private fun navigateToSettingsDestination() {
+        viewModelScope.launch {
+            _effect.send(ToDosEffect.OnNavigateToSettingsDestination)
         }
     }
 }
