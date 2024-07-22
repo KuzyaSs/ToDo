@@ -22,4 +22,5 @@
     <string name="to_do_not_found">To-do not found</string>
     <string name="overdue_deadline">Overdue deadline</string>
     <string name="retry">Retry</string>
+    <string name="navigate_to_settings">Navigate to settings</string>
 </resources>

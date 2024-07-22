@@ -33,11 +33,13 @@ fun ToDosScreen(
     effect: ToDosEffect?,
     onEvent: (ToDosEvent) -> Unit,
     onNavigateToToDoDestination: (toDoId: String?) -> Unit,
+    onNavigateToSettingsDestination: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     LaunchedEffect(key1 = effect) {
         when (effect) {
             is ToDosEffect.OnNavigateToToDoDestination -> onNavigateToToDoDestination(effect.toDoId)
+            is ToDosEffect.OnNavigateToSettingsDestination -> onNavigateToSettingsDestination()
             null -> Unit
         }
     }
@@ -64,6 +66,7 @@ fun ToDosScreen(
                 isOfflineMode = state.isOfflineMode,
                 isDoneToDoVisible = state.isDoneToDoVisible,
                 onDoneToDoVisibilityClick = { onEvent(ToDosEvent.OnDoneToDoVisibilityClick) },
+                onSettingsClick = {onEvent(ToDosEvent.OnSettingsClick)},
                 modifier = Modifier.padding(
                     start = ToDoTheme.size.large,
                     end = ToDoTheme.size.large,
@@ -159,7 +162,8 @@ fun ToDosScreenPreview() {
                 ),
                 effect = null,
                 onEvent = { },
-                onNavigateToToDoDestination = {}
+                onNavigateToToDoDestination = {},
+                onNavigateToSettingsDestination = {},
             )
         }
     }

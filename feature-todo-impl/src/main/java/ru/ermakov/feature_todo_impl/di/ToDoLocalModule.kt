@@ -1,7 +1,8 @@
 package ru.ermakov.feature_todo_impl.di
 
 import android.content.Context
-import android.content.SharedPreferences
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,16 +23,10 @@ import javax.inject.Singleton
 object ToDoLocalModule {
     @Singleton
     @Provides
-    fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences {
-        return context.getSharedPreferences("ru.ermakov.todo", Context.MODE_PRIVATE)
-    }
-
-    @Singleton
-    @Provides
     fun provideToDoSyncDateLocalDataSource(
-        sharedPreferences: SharedPreferences
+        dataStore: DataStore<Preferences>,
     ): ToDoSyncDateLocalDataSource {
-        return ToDoSyncDateLocalDataSourceImpl(sharedPreferences = sharedPreferences)
+        return ToDoSyncDateLocalDataSourceImpl(dataStore = dataStore)
     }
 
     @Singleton

@@ -2,9 +2,12 @@ package ru.ermakov.feature_todo_impl.presentation.screen.todo.component
 
 import android.content.res.Configuration
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
@@ -13,6 +16,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -40,12 +44,20 @@ fun ToDoTopAppBar(
                 )
             },
             actions = {
-                Text(
-                    text = stringResource(id = R.string.save).uppercase(),
-                    style = if (isSaveAvailable) ToDoTheme.typography.button.copy(color = ToDoTheme.colors.blue)
-                    else ToDoTheme.typography.button.copy(color = ToDoTheme.colors.labelDisable),
-                    modifier = Modifier.clickable(enabled = isSaveAvailable) { onSaveClick() }
-                )
+                Box(modifier = Modifier
+                    .clickable(
+                        enabled = isSaveAvailable,
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = rememberRipple(),
+                    ) { onSaveClick() }
+                    .padding(ToDoTheme.size.small)
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.save).uppercase(),
+                        style = if (isSaveAvailable) ToDoTheme.typography.button.copy(color = ToDoTheme.colors.blue)
+                        else ToDoTheme.typography.button.copy(color = ToDoTheme.colors.labelDisable),
+                    )
+                }
             },
             colors = TopAppBarDefaults.topAppBarColors(
                 containerColor = ToDoTheme.colors.backPrimary,

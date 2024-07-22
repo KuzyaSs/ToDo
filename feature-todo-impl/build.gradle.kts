@@ -23,6 +23,7 @@ dependencies {
     kapt(libs.androidx.room.compiler)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+    implementation(libs.androidx.datastore.preferences)
     implementation(projects.core)
     implementation(projects.database)
     implementation(projects.network)

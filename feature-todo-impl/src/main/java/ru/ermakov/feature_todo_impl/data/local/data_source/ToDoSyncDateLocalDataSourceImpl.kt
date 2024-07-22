@@ -1,32 +1,33 @@
 package ru.ermakov.feature_todo_impl.data.local.data_source
 
-import android.content.SharedPreferences
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.longPreferencesKey
+import kotlinx.coroutines.flow.first
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
-private const val TO_DO_SYNC_DATE = "TO_DO_SYNC_DATE"
+private const val TO_DO_SYNC_DATE_KEY = "TO_DO_SYNC_DATE_KEY"
 private const val SYNC_DIFFERENCE = 10L
 
 class ToDoSyncDateLocalDataSourceImpl(
-    private val sharedPreferences: SharedPreferences
+    private val dataStore: DataStore<Preferences>,
 ) : ToDoSyncDateLocalDataSource {
-    override suspend fun setToDoSyncDateToCurrentDate() {
-        sharedPreferences.edit().apply {
-            putLong(
-                TO_DO_SYNC_DATE,
-                Clock.System.now().epochSeconds - SYNC_DIFFERENCE
-            )
-        }.apply()
+    override suspend fun getToDoSyncDate(): LocalDateTime {
+        val toDoSyncDateKey = longPreferencesKey(TO_DO_SYNC_DATE_KEY)
+        val preferences = dataStore.data.first()
+        return Instant.fromEpochSeconds(preferences[toDoSyncDateKey] ?: 0)
+            .toLocalDateTime(TimeZone.currentSystemDefault())
     }
 
-    override suspend fun getToDoSyncDate(): LocalDateTime {
-        sharedPreferences.apply {
-            return Instant.fromEpochSeconds(
-                getLong(TO_DO_SYNC_DATE, 0L)
-            ).toLocalDateTime(TimeZone.currentSystemDefault())
+    override suspend fun setToDoSyncDateToCurrentDate() {
+        val toDoSyncDateKey = longPreferencesKey(TO_DO_SYNC_DATE_KEY)
+        dataStore.edit { preferences ->
+            preferences[toDoSyncDateKey] = Clock.System.now().epochSeconds - SYNC_DIFFERENCE
         }
     }
 }
