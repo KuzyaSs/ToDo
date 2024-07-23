@@ -49,6 +49,7 @@ fun SettingsScreen(
                 .padding(padding)
         ) {
             ThemeModalBottomSheet(
+                theme = state.theme,
                 isMenuVisible = state.isThemeMenuVisible,
                 onDismissRequest = { onEvent(SettingsEvent.OnThemeMenuDismiss) },
                 onItemClick = { theme -> onEvent(SettingsEvent.OnThemeChange(theme = theme)) },

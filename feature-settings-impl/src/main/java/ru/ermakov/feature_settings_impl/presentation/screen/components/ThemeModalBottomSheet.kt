@@ -1,22 +1,18 @@
 package ru.ermakov.feature_settings_impl.presentation.screen.components
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import ru.ermakov.core.presentation.theme.ToDoTheme
-import ru.ermakov.feature_settings_impl.R
 import ru.ermakov.feature_settings_impl.domain.model.Theme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ThemeModalBottomSheet(
+    theme: Theme,
     isMenuVisible: Boolean,
     onDismissRequest: () -> Unit,
     onItemClick: (theme: Theme) -> Unit,
@@ -30,38 +26,20 @@ fun ThemeModalBottomSheet(
             modifier = modifier,
         ) {
             Column(modifier = Modifier.padding(bottom = ToDoTheme.size.small)) {
-                Text(
-                    text = stringResource(id = R.string.light_theme),
-                    style = ToDoTheme.typography.body,
-                    modifier = Modifier
-                        .clickable { onItemClick(Theme.LIGHT) }
-                        .padding(
-                            vertical = ToDoTheme.size.medium,
-                            horizontal = ToDoTheme.size.medium,
-                        )
-                        .fillMaxWidth(),
+                ThemeItem(
+                    theme = Theme.LIGHT,
+                    isSelected = theme == Theme.LIGHT,
+                    onItemClick = { theme -> onItemClick(theme) },
                 )
-                Text(
-                    text = stringResource(id = R.string.dark_theme),
-                    style = ToDoTheme.typography.body,
-                    modifier = Modifier
-                        .clickable { onItemClick(Theme.DARK) }
-                        .padding(
-                            vertical = ToDoTheme.size.medium,
-                            horizontal = ToDoTheme.size.medium,
-                        )
-                        .fillMaxWidth(),
+                ThemeItem(
+                    theme = Theme.DARK,
+                    isSelected = theme == Theme.DARK,
+                    onItemClick = { theme -> onItemClick(theme) },
                 )
-                Text(
-                    text = stringResource(id = R.string.system_theme),
-                    style = ToDoTheme.typography.body,
-                    modifier = Modifier
-                        .clickable { onItemClick(Theme.SYSTEM) }
-                        .padding(
-                            vertical = ToDoTheme.size.medium,
-                            horizontal = ToDoTheme.size.medium,
-                        )
-                        .fillMaxWidth(),
+                ThemeItem(
+                    theme = Theme.SYSTEM,
+                    isSelected = theme == Theme.SYSTEM,
+                    onItemClick = { theme -> onItemClick(theme) },
                 )
             }
         }
