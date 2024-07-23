@@ -52,11 +52,12 @@ fun ToDoList(
                         modifier = Modifier.padding(horizontal = ToDoTheme.size.medium)
                     )
                 }
-                items(undoneToDos) { toDo ->
+                items(items = undoneToDos, key = { toDo -> toDo.id }) { toDo ->
                     ToDoItem(
                         toDo = toDo,
                         onItemClick = onToDoItemClick,
-                        onDoneChange = onDoneChange
+                        onDoneChange = onDoneChange,
+                        modifier = Modifier.animateItem(),
                     )
                 }
             }
@@ -69,11 +70,12 @@ fun ToDoList(
                         modifier = Modifier.padding(horizontal = ToDoTheme.size.medium)
                     )
                 }
-                items(doneToDos) { toDo ->
+                items(items = doneToDos, key = { toDo -> toDo.id }) { toDo ->
                     ToDoItem(
                         toDo = toDo,
                         onItemClick = onToDoItemClick,
-                        onDoneChange = onDoneChange
+                        onDoneChange = onDoneChange,
+                        modifier = Modifier.animateItem(),
                     )
                 }
             }

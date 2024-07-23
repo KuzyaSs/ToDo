@@ -19,7 +19,8 @@
         <activity
             android:name=".presentation.ToDoActivity"
             android:exported="true"
-            android:theme="@style/Theme.ToDo">
+            android:theme="@style/Theme.ToDo"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import ru.ermakov.core.presentation.theme.ToDoTheme
 import ru.ermakov.feature_settings_impl.presentation.screen.components.SettingsTopAppBar
+import ru.ermakov.feature_settings_impl.presentation.screen.components.ThemeModalBottomSheet
 import ru.ermakov.feature_settings_impl.presentation.screen.components.ThemeSelector
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -47,16 +48,19 @@ fun SettingsScreen(
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            ThemeSelector(
-                theme = state.theme,
+            ThemeModalBottomSheet(
                 isMenuVisible = state.isThemeMenuVisible,
-                onMenuClick = { onEvent(SettingsEvent.OnThemeMenuOpen) },
                 onDismissRequest = { onEvent(SettingsEvent.OnThemeMenuDismiss) },
                 onItemClick = { theme -> onEvent(SettingsEvent.OnThemeChange(theme = theme)) },
+            )
+
+            ThemeSelector(
+                theme = state.theme,
+                onMenuClick = { onEvent(SettingsEvent.OnThemeMenuOpen) },
                 modifier.padding(
                     horizontal = ToDoTheme.size.medium,
                     vertical = ToDoTheme.size.small,
-                )
+                ),
             )
         }
     }

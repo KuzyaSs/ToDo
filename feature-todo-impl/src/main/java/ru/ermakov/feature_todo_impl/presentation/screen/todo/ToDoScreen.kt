@@ -48,6 +48,7 @@ import kotlinx.datetime.Month
 import ru.ermakov.core.presentation.theme.ToDoTheme
 import ru.ermakov.feature_todo_impl.R
 import ru.ermakov.feature_todo_impl.presentation.screen.todo.component.DeadlineSelector
+import ru.ermakov.feature_todo_impl.presentation.screen.todo.component.PriorityModalBottomSheet
 import ru.ermakov.feature_todo_impl.presentation.screen.todo.component.PrioritySelector
 import ru.ermakov.feature_todo_impl.presentation.screen.todo.component.ToDoContentTextField
 import ru.ermakov.feature_todo_impl.presentation.screen.todo.component.ToDoTopAppBar
@@ -73,6 +74,7 @@ fun ToDoScreen(
                     hostState.showSnackbar(message = effect.error.toStringToDoError(context = context))
                 }
             }
+
             null -> Unit
         }
     }
@@ -133,6 +135,14 @@ fun ToDoScreen(
                 }
             }
         } else {
+            PriorityModalBottomSheet(
+                isMenuVisible = state.isPriorityMenuVisible,
+                onDismissRequest = { onEvent(ToDoEvent.OnPriorityMenuDismiss) },
+                onItemClick = { priority ->
+                    onEvent(ToDoEvent.OnPriorityChange(priority = priority))
+                }
+            )
+
             Column(
                 modifier = modifier
                     .fillMaxSize()
@@ -151,10 +161,7 @@ fun ToDoScreen(
                 )
                 PrioritySelector(
                     priority = state.priority,
-                    isMenuVisible = state.isPriorityMenuVisible,
                     onMenuClick = { onEvent(ToDoEvent.OnPriorityMenuOpen) },
-                    onDismissRequest = { onEvent(ToDoEvent.OnPriorityMenuDismiss) },
-                    onItemClick = { priority -> onEvent(ToDoEvent.OnPriorityChange(priority = priority)) }
                 )
                 HorizontalDivider(thickness = 0.5.dp, color = ToDoTheme.colors.supportSeparator)
                 DatePicker(
