@@ -1,22 +1,18 @@
 package ru.ermakov.feature_todo_impl.presentation.screen.todo.component
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import ru.ermakov.core.presentation.theme.ToDoTheme
 import ru.ermakov.feature_todo_api.domain.model.Priority
-import ru.ermakov.feature_todo_impl.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PriorityModalBottomSheet(
+    priority: Priority,
     isMenuVisible: Boolean,
     onDismissRequest: () -> Unit,
     onItemClick: (priority: Priority) -> Unit,
@@ -30,38 +26,20 @@ fun PriorityModalBottomSheet(
             modifier = modifier,
         ) {
             Column(modifier = Modifier.padding(bottom = ToDoTheme.size.small)) {
-                Text(
-                    text = stringResource(id = R.string.normal_priority_selection),
-                    style = ToDoTheme.typography.body,
-                    modifier = Modifier
-                        .clickable { onItemClick(Priority.NORMAL) }
-                        .padding(
-                            vertical = ToDoTheme.size.medium,
-                            horizontal = ToDoTheme.size.medium,
-                        )
-                        .fillMaxWidth(),
+                PriorityItem(
+                    priority = Priority.NORMAL,
+                    isSelected = priority == Priority.NORMAL,
+                    onItemClick = { priority -> onItemClick(priority) },
                 )
-                Text(
-                    text = stringResource(id = R.string.low_priority_selection),
-                    style = ToDoTheme.typography.body,
-                    modifier = Modifier
-                        .clickable { onItemClick(Priority.LOW) }
-                        .padding(
-                            vertical = ToDoTheme.size.medium,
-                            horizontal = ToDoTheme.size.medium,
-                        )
-                        .fillMaxWidth(),
+                PriorityItem(
+                    priority = Priority.LOW,
+                    isSelected = priority == Priority.LOW,
+                    onItemClick = { priority -> onItemClick(priority) },
                 )
-                Text(
-                    text = stringResource(id = R.string.urgent_priority_selection),
-                    style = ToDoTheme.typography.body.copy(color = ToDoTheme.colors.red),
-                    modifier = Modifier
-                        .clickable { onItemClick(Priority.URGENT) }
-                        .padding(
-                            vertical = ToDoTheme.size.medium,
-                            horizontal = ToDoTheme.size.medium,
-                        )
-                        .fillMaxWidth(),
+                PriorityItem(
+                    priority = Priority.URGENT,
+                    isSelected = priority == Priority.URGENT,
+                    onItemClick = { priority -> onItemClick(priority) },
                 )
             }
         }
